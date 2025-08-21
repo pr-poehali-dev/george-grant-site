@@ -1,8 +1,16 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Index = () => {
+  const [heroRef, heroVisible] = useScrollAnimation(0.3);
+  const [concertRef, concertVisible] = useScrollAnimation(0.2);
+  const [musicRef, musicVisible] = useScrollAnimation(0.2);
+  const [galleryRef, galleryVisible] = useScrollAnimation(0.2);
+  const [aboutRef, aboutVisible] = useScrollAnimation(0.2);
+  const [contactRef, contactVisible] = useScrollAnimation(0.2);
+
   const concerts = [
     {
       date: "25 Декабря 2024",
@@ -72,7 +80,12 @@ const Index = () => {
         >
           <div className="absolute inset-0 bg-black/70"></div>
         </div>
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+        <div 
+          ref={heroRef}
+          className={`relative z-10 text-center max-w-4xl mx-auto px-4 transition-all duration-1000 ${
+            heroVisible ? 'animate-fade-up opacity-100' : 'opacity-0 translate-y-12'
+          }`}
+        >
           <h1 className="text-6xl md:text-8xl font-playfair font-bold mb-6 text-white">
             GEORGE
             <span className="block text-primary">GRANT</span>
@@ -95,12 +108,19 @@ const Index = () => {
 
       {/* Concert Section */}
       <section id="concerts" className="py-20 container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div 
+          ref={concertRef}
+          className={`text-center mb-16 transition-all duration-1000 delay-200 ${
+            concertVisible ? 'animate-fade-down opacity-100' : 'opacity-0 -translate-y-8'
+          }`}
+        >
           <h2 className="text-5xl font-playfair font-bold mb-4">Концерты</h2>
           <p className="text-xl text-muted-foreground">Предстоящие выступления</p>
         </div>
         
-        <div className="grid gap-6 max-w-4xl mx-auto">
+        <div className={`grid gap-6 max-w-4xl mx-auto transition-all duration-1000 delay-400 ${
+            concertVisible ? 'animate-fade-up opacity-100' : 'opacity-0 translate-y-8'
+          }`}>
           {concerts.map((concert, index) => (
             <Card key={index} className="bg-card border-border hover:border-primary/50 transition-colors">
               <CardContent className="p-6">
@@ -141,12 +161,19 @@ const Index = () => {
       {/* Music Section */}
       <section id="music" className="py-20 bg-muted/20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div 
+            ref={musicRef}
+            className={`text-center mb-16 transition-all duration-1000 delay-200 ${
+              musicVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-95'
+            }`}
+          >
             <h2 className="text-5xl font-playfair font-bold mb-4">Музыка</h2>
             <p className="text-xl text-muted-foreground">Популярные треки</p>
           </div>
 
-          <div className="max-w-2xl mx-auto">
+          <div className={`max-w-2xl mx-auto transition-all duration-1000 delay-500 ${
+              musicVisible ? 'animate-fade-up opacity-100' : 'opacity-0 translate-y-8'
+            }`}>
             <Card className="bg-card border-border">
               <CardContent className="p-8">
                 <div className="space-y-4">
@@ -193,12 +220,19 @@ const Index = () => {
 
       {/* Gallery Section */}
       <section id="gallery" className="py-20 container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div 
+          ref={galleryRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            galleryVisible ? 'animate-fade-down opacity-100' : 'opacity-0 -translate-y-8'
+          }`}
+        >
           <h2 className="text-5xl font-playfair font-bold mb-4">Галерея</h2>
           <p className="text-xl text-muted-foreground">Фото и видео</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-300 ${
+            galleryVisible ? 'animate-fade-up opacity-100' : 'opacity-0 translate-y-12'
+          }`}>
           {gallery.map((item) => (
             <Card key={item.id} className="group overflow-hidden hover:scale-105 transition-transform duration-300">
               <div className="relative aspect-square">
@@ -223,7 +257,12 @@ const Index = () => {
       {/* About Section */}
       <section id="about" className="py-20 bg-muted/20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
+          <div 
+            ref={aboutRef}
+            className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${
+              aboutVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-95'
+            }`}
+          >
             <h2 className="text-5xl font-playfair font-bold mb-8">О George Grant</h2>
             <div className="text-lg leading-relaxed space-y-6 text-muted-foreground">
               <p>
@@ -247,12 +286,19 @@ const Index = () => {
 
       {/* Contact Section */}
       <section id="contact" className="py-20 container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div 
+          ref={contactRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            contactVisible ? 'animate-fade-down opacity-100' : 'opacity-0 -translate-y-8'
+          }`}
+        >
           <h2 className="text-5xl font-playfair font-bold mb-4">Контакты</h2>
           <p className="text-xl text-muted-foreground">Свяжитесь с нами</p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className={`max-w-4xl mx-auto transition-all duration-1000 delay-400 ${
+            contactVisible ? 'animate-fade-up opacity-100' : 'opacity-0 translate-y-8'
+          }`}>
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-6">
               <h3 className="text-2xl font-playfair font-semibold mb-6">Для поклонников</h3>
